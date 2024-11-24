@@ -85,6 +85,7 @@ jobs:
             docker stop notificaciones || true
             docker container rm -f notificaciones || true
             docker run -d --name notificaciones -p 3002:3002 \
+              -e AWS_REGION=${{ secrets.AWS_DEFAULT_REGION }} \
               -e SNS_TOPIC_ARN=${{ secrets.SNS_TOPIC_ARN }} \
               -e aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }} \
               -e aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
