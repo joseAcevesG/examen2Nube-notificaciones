@@ -86,5 +86,8 @@ jobs:
             docker container rm -f notificaciones || true
             docker run -d --name notificaciones -p 3002:3002 \
               -e SNS_TOPIC_ARN=${{ secrets.SNS_TOPIC_ARN }} \
+              -e aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }} \
+              -e aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+              -e aws_session_token=${{ secrets.AWS_SESSION_TOKEN }} \
               ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_DEFAULT_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY }}:${{ github.run_id }}
           EOF
